@@ -73,7 +73,7 @@ class RequestModel {
             ? null
             : json["services"].runtimeType == int
                 ? ServicesModel(id: json["services"])
-                : ServicesModel.fromMap(json["services"]),
+                : ServicesModel.fromJson(json["services"]),
         //  request_date,
         // request_time
       );

@@ -4,203 +4,199 @@ import 'dart:ffi';
 import 'package:untitled3/services/models/category_model.dart';
 import 'package:untitled3/users/model/user_model.dart';
 
+
 class ServicesModel {
   int? id;
+  Users? createdBy;
+  Category? category;
   String? Name;
-  String? Detial_AR;
-  // String? Email;
-  bool? is_radiation;
-  bool? is_laboratry;
-  bool? is_farmacy;
-  bool? is_clinic;
-  bool? is_ServicesModel;
-  String? Phone_Number_tow;
-
-  String? location_Name;
-  String? images_back;
-  String? Phone_Number;
-  String? Date_Update;
-  String? Date_Added;
-  String? images_main;
-
-  Users? created_by;
   double? latitude;
   double? longitude;
-  List<Category>? category;
+  bool? isNeedService;
+  bool? isHaveService;
+  String? detialAR;
+  String? locationName;
+  String? imagesOne;
+  String? imagesTow;
+  String? imagesThree;
+  String? dateAdded;
+  String? request_date;
+  String? request_time;
+  String? dateUpdate;
+  bool? isCancel;
+  bool? isConform;
+  bool? isFinish;
+  String? phoneNumber;
+  String? phoneNumberTow;
 
-  ServicesModel({
-    this.id,
-    this.Detial_AR,
-    this.Date_Added,
-    this.Date_Update,
-    this.images_main,
-    this.Name,
-    this.Phone_Number,
-    // this.Email,
-    this.location_Name,
-    this.images_back,
-    this.is_clinic,
-    this.is_farmacy,
-    this.created_by,
-    this.latitude,
-    this.longitude,
-    this.category = const [],
-    this.is_ServicesModel,
-    this.Phone_Number_tow,
-    this.is_laboratry,
-    this.is_radiation,
-    // this.is_riting,
-    // this.ratingdata,
-  });
+  ServicesModel(
+      {this.id,
+        this.createdBy,
+        this.category,
+        this.Name,
+        this.latitude,
+        this.longitude,
+        this.isNeedService,
+        this.isHaveService,
+        this.detialAR,
+        this.locationName,
+        this.imagesOne,
+        this.imagesTow,
+        this.imagesThree,
+        this.dateAdded,
+        this.request_date,
+        this.request_time,
+        this.dateUpdate,
+        this.isCancel,
+        this.isConform,
+        this.isFinish,
+        this.phoneNumber,
+        this.phoneNumberTow});
 
-  // ActivTime? Activ_Time;
-  // List<RatingdataServicesModel>? ratingdata;
-  // List<IsRitingServicesModel>? is_riting;
+  ServicesModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    createdBy = json['created_by'] != null
+        ? json['created_by'].runtimeType == int
+        ? Users(id: json['created_by'])
+        : Users.fromJson(json['created_by'])
+        : null;
+    category = json['category'] != null
+        ? json['category'].runtimeType == int
+        ? Category(id: json['category'])
+        : Category.fromJson(json['category'])
+        : null;
+    Name = json['Name'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+    isNeedService = json['is_need_service'];
+    isHaveService = json['is_have_service'];
+    detialAR = json['Detial_AR'];
+    locationName = json['location_Name'];
+    imagesOne = json['images_one'];
+    imagesTow = json['images_tow'];
+    imagesThree = json['images_three'];
+    dateAdded = json['Date_Added'];
+    request_date = json['request_date'];
+    request_time = json['request_time'];
+    dateUpdate = json['Date_Update'];
+    isCancel = json['isCancel'];
+    isConform = json['isConform'];
+    isFinish = json['isFinish'];
+    phoneNumber = json['Phone_Number'];
+    phoneNumberTow = json['Phone_Number_tow'];
+  }
 
-  factory ServicesModel.fromMap(Map<String, dynamic> json) => ServicesModel(
-        id: json["id"],
-        Name: json["Name"],
-        Detial_AR: json["Detial_AR"],
+  Map<String, String> toJson() {
+    final Map<String, String> data = <String, String>{};
+    // data['id'] = id;
+    if (createdBy != null && createdBy!.id != 0) {
+      data['created_by'] = createdBy!.id.toString();
+    }
+    if (category != null) {
+      data['category'] = category!.id!.toString();
+    }
+    data['Name'] = Name.toString();
+    data['latitude'] = latitude.toString();
+    data['longitude'] = longitude.toString();
+    data['is_need_service'] = isNeedService.toString();
+    data['is_have_service'] = isHaveService.toString();
+    data['Detial_AR'] = detialAR.toString();
+    data['location_Name'] = locationName.toString();
+    // data['images_one'] = imagesOne;
+    // data['images_tow'] = imagesTow;
+    // data['images_three'] = imagesThree;
+    // data['Date_Added'] = dateAdded;
+    data['request_date'] = request_date.toString();
+    data['request_time'] = request_time.toString();
+    // data['Date_Update'] = dateUpdate.toString();
+    data['isCancel'] = isCancel.toString();
+    // data['isConform'] = isConform.toString();
+    data['isFinish'] = isFinish.toString();
+    data['Phone_Number'] = phoneNumber.toString();
+    data['Phone_Number_tow'] = phoneNumberTow.toString();
+    return data;
+  }
 
-        // Email: json["Email"],
-        category: json["category"] == null
-            ? []
-            : List<Category>.from(json["category"].map((x) =>
-                x.runtimeType == Int ? Category(id: x) : Category.fromJson(x))),
+  Map<String, dynamic> toJsonIsCansel() => {
+    // "isConform":isConform,
 
-        // doctors: json["doctors"] == null
-        //       ? []
-        //       : List<Doctors>.from(
-        //       json["doctors"].map((x) => Doctors.fromJson(x))),
+    "isCancel": isCancel,
+    // "isFinish":isFinish,
+    // "request_date":request_date,
+    // "request_time":request_time,
+    // "Date_Added":Date_Added,
+    // "Date_Update":Date_Update,
+    // "Phone_Number": Phone_Number,
+  };
+  Map<String, dynamic> toJsonIsConfirm() => {
+    "isConform": isConform,
 
-        created_by: json["created_by"] == null
-            ? null
-            : json["created_by"].runtimeType == int
-                ? Users(id: json["created_by"])
-                : Users.fromJsonListComercial(json["created_by"]),
-        latitude: json["latitude"] == null ? null : json["latitude"],
-        longitude: json["longitude"] == null ? null : json["longitude"],
-        // keyVerify: json["keyVerify"],
-        // isVerify: json["isVerify"]==0,
+    // "isCancel":isCancel,
+    // "isFinish":isFinish,
+    // "request_date":request_date,
+    // "request_time":request_time,
+    // "Date_Added":Date_Added,
+    // "Date_Update":Date_Update,
+    // "Phone_Number": Phone_Number,
+  };
+  Map<String, dynamic> toJsonIsFinish() => {
+    "isFinish": isFinish,
 
-        Phone_Number: json["Phone_Number"],
-        images_main: json["images_main"],
-        Date_Added: json["Date_Added"],
-
-        Date_Update: json["Date_Update"],
-        // Activ_Time: json["Activ_Time"] == null
-        //     ? null: json["Activ_Time"].runtimeType==int?ActivTime(id:json["Activ_Time"])
-        //     : ActivTime.fromJson(json["Activ_Time"]),
-
-        // isBlock: json["isBlock"] != null ? json["isBlock"] : 0,
-        // is_clinic: json["is_clinic"] != null ? json["is_clinic"] : 0,
-
-        is_farmacy: json["is_farmacy"] ?? false,
-        is_clinic: json["is_clinic"] ?? false,
-        is_laboratry: json["is_laboratry"] ?? false,
-        is_radiation: json["is_radiation"] ?? false,
-        is_ServicesModel: json["is_ServicesModel"] ?? true,
-
-        Phone_Number_tow: json["Phone_Number_tow"],
-
-        // keyVerify: json["keyVerify"],
-        // isVerify: json["isVerify"]==0,
-        // is_riting: json["isRiting"] == null
-        //     ? []
-        //     : List<IsRitingServicesModel>.from(
-        //     json["isRiting"].map((x) => IsRitingServicesModel.fromJson(x))),
-
-        // ratingdata: json["ratingdata"] == null
-        //     ? []
-        //     : List<RatingdataServicesModel>.from(
-        //     json["ratingdata"].map((x) => RatingdataServicesModel.fromJson(x))),
-        location_Name: json["location_Name"],
-
-        // KeyActiveStatus: json["KeyActiveStatus"],
-      );
-  factory ServicesModel.fromMapForSave(Map<String, dynamic> json) =>
-      ServicesModel(
-        id: json["id"],
-        Name: json["Name"],
-        Detial_AR: json["Detial_AR"],
-
-        // Email: json["Email"],
-        // category: json["category"] == null
-        //     ? []
-        //     : List<Category>.from(
-        //     json["category"].map((x) => Category.fromJson(x))),
-        // created_by: json["created_by"] == null
-        //     ? null
-        //     : Users.fromJsonListComercial(json["created_by"]),
-        latitude: json["latitude"] == null ? null : json["latitude"],
-        longitude: json["longitude"] == null ? null : json["longitude"],
-        // keyVerify: json["keyVerify"],
-        // isVerify: json["isVerify"]==0,
-        images_back: json["images_background"],
-        Phone_Number: json["Phone_Number"],
-        images_main: json["images_main"],
-        Date_Added: json["Date_Added"],
-
-        Date_Update: json["Date_Update"],
-        // Activ_Time: json["Activ_Time"] == null
-        //     ? null
-        //     : ActivTime.fromJson(json["Activ_Time"]),
-
-        // isBlock: json["isBlock"] != null ? json["isBlock"] : 0,
-        // is_clinic: json["is_clinic"] != null ? json["is_clinic"] : 0,
-
-        is_farmacy: json["is_farmacy"] ?? false,
-        is_clinic: json["is_clinic"] ?? false,
-        is_laboratry: json["is_laboratry"] ?? false,
-        is_radiation: json["is_radiation"] ?? false,
-        is_ServicesModel: json["is_ServicesModel"] ?? true,
-        Phone_Number_tow: json["Phone_Number_tow"],
-
-        // keyVerify: json["keyVerify"],
-        // isVerify: json["isVerify"]==0,
-        // is_riting: json["isRiting"] == null
-        //     ? []
-        // : List<IsRitingServicesModel>.from(
-        // json["isRiting"].map((x) => IsRitingServicesModel.fromJson(x))),
-
-        // ratingdata: json["ratingdata"] == null
-        //     ? []
-        //     : List<RatingdataServicesModel>.from(
-        //     json["ratingdata"].map((x) => RatingdataServicesModel.fromJson(x))),
-        location_Name: json["location_Name"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "Name": Name,
-        "Detial_AR": Detial_AR,
-        // "Email": Email,
-        "Phone_Number": Phone_Number,
-        "category": category?.map((x) => x.id).toList(),
-        "Phone_Number": Phone_Number,
-        " images_main": images_main,
-        "id_api": id,
-        // "last_Name": lastName,
-        "Date_Added": Date_Added,
-        "images_background": images_back,
-        "Date_Update": Date_Update,
-      };
-
-  dynamic toJsonsaveLocation() => {
-        'latitude': latitude,
-        // 'Email': Email,
-        //'keyVerify':KeyActiveStatus,
-        'longitude': longitude,
-      };
-
-  dynamic toJsonsave() => {
-        'id': id,
-        'Name': Name,
-        // 'Email': Email,
-        //'keyVerify':KeyActiveStatus,
-        'Detial_AR': Detial_AR,
-        'Phone_Number': Phone_Number,
-        "images_background": images_back,
-        "images_main": images_main,
-      };
+    // "isCancel":isCancel,
+    // "isFinish":isFinish,
+    // "request_date":request_date,
+    // "request_time":request_time,
+    // "Date_Added":Date_Added,
+    // "Date_Update":Date_Update,
+    // "Phone_Number": Phone_Number,
+  };
 }
+
+// class CreatedBy {
+//   int? id;
+//   String? fullName;
+//   String? location;
+//   Null? email;
+//   String? password;
+//   String? phoneNo;
+//   String? dateUpdate;
+//   String? dateAdded;
+//   Null? imagesUser;
+//
+//   CreatedBy(
+//       {this.id,
+//         this.fullName,
+//         this.location,
+//         this.email,
+//         this.password,
+//         this.phoneNo,
+//         this.dateUpdate,
+//         this.dateAdded,
+//         this.imagesUser});
+//
+//   CreatedBy.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     fullName = json['Full_Name'];
+//     location = json['location'];
+//     email = json['Email'];
+//     password = json['password'];
+//     phoneNo = json['PhoneNo'];
+//     dateUpdate = json['Date_Update'];
+//     dateAdded = json['Date_Added'];
+//     imagesUser = json['images_user'];
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = id;
+//     data['Full_Name'] = fullName;
+//     data['location'] = location;
+//     data['Email'] = email;
+//     data['password'] = password;
+//     data['PhoneNo'] = phoneNo;
+//     data['Date_Update'] = dateUpdate;
+//     data['Date_Added'] = dateAdded;
+//     data['images_user'] = imagesUser;
+//     return data;
+//   }
+// }

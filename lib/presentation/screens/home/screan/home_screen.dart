@@ -41,7 +41,7 @@ class MyHomePageState extends State<MyHomePage> {
           backgroundColor: MyColor.myYellow,
           onPressed: () {
              Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ServiceInfo('',isServiceNeeder: false,isServiceProvider: true,modifyButtonPressed: false,)));
+              .push(MaterialPageRoute(builder: (context) => ServiceInfo(isServiceNeeder: false,isServiceProvider: true,modifyButtonPressed: false,)));
           },
           child: Icon(Icons.add),
         ),
