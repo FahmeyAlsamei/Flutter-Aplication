@@ -27,7 +27,7 @@ class ServiceItem extends StatelessWidget {
         onTap: (){
           print(services);
            Navigator.of(context).push(
-             MaterialPageRoute(builder: (_)=>ServiceInfo( category.Name!,isServiceNeeder: true,isServiceProvider: false,modifyButtonPressed: false,))
+             MaterialPageRoute(builder: (_)=>ServiceInfo( isServiceNeeder: true,isServiceProvider: false,modifyButtonPressed: false,))
            );
         },
         child: GridTile(

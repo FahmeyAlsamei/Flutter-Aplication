@@ -146,7 +146,7 @@ class ServicesProvider with ChangeNotifier {
     ServicesModel? Services1;
     if (response.statusCode == 201) {
       Services1 =
-          ServicesModel.fromMap(json.decode(utf8.decode(response.bodyBytes)));
+          ServicesModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
       return Services1;
     }
     return Services1;
@@ -166,7 +166,7 @@ class ServicesProvider with ChangeNotifier {
           "Content-Type": "application/json",
           //'Authorization': '9054f7aa9305e012b3c2300408c3dfdf390fcddf'
         },
-        body: jsonEncode(Services.toMap()));
+        body: jsonEncode(Services.toJson()));
     //
     // var request =http.post(
     //
@@ -210,7 +210,7 @@ class ServicesProvider with ChangeNotifier {
     ServicesModel? Services1;
     if (response.statusCode == 201) {
       Services1 =
-          ServicesModel.fromMap(json.decode(utf8.decode(response.bodyBytes)));
+          ServicesModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
       return Services1;
     }
     return Services1;
@@ -275,7 +275,7 @@ class ServicesProvider with ChangeNotifier {
 
         data.forEach((_ap) async {
           print(_ap);
-          AppData.ListServices.add(ServicesModel.fromMap(_ap));
+          AppData.ListServices.add(ServicesModel.fromJson(_ap));
 
           var set = <int>{};
           AppData.ListServices =
@@ -332,7 +332,7 @@ class ServicesProvider with ChangeNotifier {
 
         data.forEach((_ap) async {
           print(_ap);
-          AppData.ListServices.add(ServicesModel.fromMap(_ap));
+          AppData.ListServices.add(ServicesModel.fromJson(_ap));
 
           var set = <int>{};
           AppData.ListServices =
@@ -365,9 +365,9 @@ class ServicesProvider with ChangeNotifier {
         print(data);
 
         Services =
-            ServicesModel.fromMap(json.decode(utf8.decode(response.bodyBytes)));
+            ServicesModel.fromJson(json.decode(utf8.decode(response.bodyBytes)));
         _todos = data
-            .map<ServicesModel>((json) => ServicesModel.fromMap(json))
+            .map<ServicesModel>((json) => ServicesModel.fromJson(json))
             .toList();
 
         return Services;
